@@ -4,11 +4,29 @@
 
 int main(int argc, char* argv[]){
 
+    if (argc!=3) {
+        printf("./add-nbo file1 file2\n");
+        return 0;
+    }
+
     FILE* File1 = fopen(argv[1], "r");
     FILE* File2 = fopen(argv[2], "r");
 
     if(File1 == NULL || File2 == NULL){
-        printf("ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.");
+        printf("íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.");
+        return 0;
+    }
+
+    fseek(File1, 0, SEEK_END);
+    long int File1size = ftell(File1);
+    fseek(File1, 0, SEEK_SET);
+
+    fseek(File2, 0, SEEK_END);
+    long int File2size = ftell(File2);
+    fseek(File2, 0, SEEK_SET);
+
+    if (File1size<4 || File2size<4) {
+        printf("íŒŒì¼ í¬ê¸°ê°€ ì‘ìŠµë‹ˆë‹¤.");
         return 0;
     }
 
